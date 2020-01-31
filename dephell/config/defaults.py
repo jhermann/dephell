@@ -1,8 +1,13 @@
+"""
+Define various default values (on import), stored in the ``DEFAULT`` dict.
+"""
+
 # built-in
+import os
 from pathlib import Path
 
 # app
-from ..constants import DEFAULT_WAREHOUSE
+from ..constants import DEFAULT_WAREHOUSE, IS_WINDOWS
 from .app_dirs import get_cache_dir, get_data_dir
 
 
@@ -54,3 +59,6 @@ DEFAULT = dict(
         exclude=[],
     ),
 )
+
+if IS_WINDOWS and os.environ.get('LOCALAPPDATA'):
+    DEFAULT['bin'] = str(Path(os.environ.get('LOCALAPPDATA')) / 'bin')
